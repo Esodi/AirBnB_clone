@@ -3,47 +3,42 @@
 
 """
 import uuid
-import datetime
+from datetime import datetime
 
 class BaseModel:
     """Base class for all coming subclasses"""
 
-    def __init__(self, *args, **kwargs):     
-
+    def __init__(self, *args, **kwargs):
+        '''init method for BaseModel class'''
         if kwargs:
             for key, value in kwargs.items():
-                 if key == 'created_at' or key == 'updated_at':
-                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                 elif key != '__class__':
+                if 'created_at' in kwargs and isinstance(kwargs['created_at'], str):
+                    kwargs['created_at'] = datetime.fromisoformat(kwargs['created_at'])
+                if 'updated_at' in kwargs and isinstance(kwargs['updated_at'], str):
+                    kwargs['updated_at'] = datetime.fromisoformat(kwargs['updated_at'])
+                if key != '__class__':
                     setattr(self, key, value)
             if 'id' not in kwargs:
                 self.id = str(uuid.uuid4())
             if 'created_at' not in kwargs:
-                self.created_at = datetime.datetime.now()
-            if 'updated_at' not in kwargs:     
-                self.updated_at = datetime.datetime.now()
-
-            else:
-                self.id = str(uuid.uuid4())
                 self.created_at = datetime.now()
+            if 'updated_at' not in kwargs:     
                 self.updated_at = datetime.now()
-
-    def __init__(self, my_num=None, name=None):
-         '''initialize instance attributes'''
-         self.my_number = my_num
-         self.name = name
-         self.updated_at = datetime.datetime.now()
-         self.id = str(uuid.uuid4())
-         self.created_at = datetime.datetime.now()
+        else:
+            self.id = str(uuid.uuid4())
+            self.updated_at = datetime.now()
+            self.created_at = datetime.now()
 
     def save(self):
         '''updates time of an instance'''
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         '''Return dictionary form of object's attributes'''
         self.__dict__['__class__'] = self.__class__.__name__
+        #if self.__dict__.get('created_at'):
         self.__dict__['created_at'] = self.created_at.isoformat()
+        #if self.__dict__.get('updated_at'):
         self.__dict__['updated_at'] = self.updated_at.isoformat()
         return self.__dict__
 
