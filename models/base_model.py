@@ -2,8 +2,11 @@
 """class BaseModel that defines all common attributes/methods for other classes
 
 """
+
+
 import uuid
 from datetime import datetime
+from models.__init__ import storage
 
 class BaseModel:
     """Base class for all coming subclasses"""
@@ -32,13 +35,12 @@ class BaseModel:
     def save(self):
         '''updates time of an instance'''
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         '''Return dictionary form of object's attributes'''
         self.__dict__['__class__'] = self.__class__.__name__
-        #if self.__dict__.get('created_at'):
         self.__dict__['created_at'] = self.created_at.isoformat()
-        #if self.__dict__.get('updated_at'):
         self.__dict__['updated_at'] = self.updated_at.isoformat()
         return self.__dict__
 
