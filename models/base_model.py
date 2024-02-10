@@ -8,6 +8,7 @@ import uuid
 from datetime import datetime
 from models.__init__ import storage
 
+
 class BaseModel:
     """Base class for all coming subclasses"""
 
@@ -31,6 +32,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.updated_at = datetime.now()
             self.created_at = datetime.now()
+        storage.new(self)
 
     def save(self):
         '''updates time of an instance'''

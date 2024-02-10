@@ -6,31 +6,42 @@
 
 import json
 import os
+import importlib.util
+
 
 class FileStorage:
     '''class that convert to json'''
-
-    def __init__(self, *args, **kwargs):
-        '''initialiazation method'''
-        self.__file_path = "file.json"
-        self.__objects = {}
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         '''returns __objects dict'''
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         '''add an object to __object dict'''
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj
+        FileStorage.__objects[key] = obj
 
     def save(self):
         '''saves to json string'''
-        with open(self.__file_path, 'w') as json_f:
-            json.dump(self.__objects, json_f, indent=4)
-
+        serialized_objs = {}
+        for key, value in FileStorage.__objects.items():
+            serialized_objs[key] = value.to_dict()
+        with open(FileStorage.__file_path, 'w') as f:
+            json.dump(serialized_objs, f)
+    
     def reload(self):
-        '''loads from json string'''
         if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r') as json_f:
-              self.__objects = json.load(json_f)
+            with open(self.__file_path, 'r') as file:
+                data = json.load(file)
+                for key, value in data.items():
+                    class_name, obj_id = key.split('.')
+                    class_n = class_name[0:4] + "_" + class_name[4:]
+                    module_name = class_n.lower() # Convert class name to lowercase and replace underscores with hyphens
+                    module_path = os.path.join("models", module_name + ".py")
+                    spec = importlib.util.spec_from_file_location(module_name, module_path)
+                    module = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(module)
+                    class_ = getattr(module, class_name)
+                    self.__objects[key] = class_(**value)
