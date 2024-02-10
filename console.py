@@ -2,6 +2,7 @@
 """HBNB console"""
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     """This is command line interpreter"""
     prompt = "(hbnb)"
@@ -18,7 +19,7 @@ class HBNBCommand(cmd.Cmd):
     def help_quit(self):
         print("Quit command to exit the program")
 
-    def help_EOL(self):
+    def help_EOF(self):
         print("Exit console on EOL")
 
 if __name__ == '__main__':
