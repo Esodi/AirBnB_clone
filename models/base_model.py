@@ -53,10 +53,13 @@ class BaseModel:
 
     def to_dict(self):
         '''Return dictionary form of object's attributes'''
-        self.__dict__['__class__'] = self.__class__.__name__
-        self.__dict__['created_at'] = self.__dict__['created_at'].isoformat()
-        self.__dict__['updated_at'] = self.__dict__['updated_at'].isoformat()
-        return self.__dict__
+        obj_dict = self.__dict__.copy()
+        obj_dict['__class__'] = self.__class__.__name__
+        if isinstance(obj_dict['created_at'], datetime):
+            obj_dict['created_at'] = obj_dict['created_at'].isoformat()
+        if isinstance(obj_dict['updated_at'], datetime):
+            obj_dict['updated_at'] = obj_dict['updated_at'].isoformat()
+        return obj_dict
 
     def __str__(self):
         '''Returns the string form of an object'''

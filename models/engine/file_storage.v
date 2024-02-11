@@ -37,19 +37,19 @@ class FileStorage:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name, obj_id = key.split('.')
-                    if class_name == 'BaseModel':
-                        class_n = class_name[0:4] + "_" + class_name[4:]
-                    else:
-                        class_n = class_name
-                    module_name = class_n.lower()
+                    module_name = self.get_module_name(class_name)
                     module_path = os.path.join("models", module_name + ".py")
-                    spec = (
-                        importlib.util.spec_from_file_location(
-                            module_name,
-                            module_path
-                            )
-                        )
+                    spec = importlib.util.spec_from_file_location(module_name, module_path)
                     module = importlib.util.module_from_spec(spec)
                     spec.loader.exec_module(module)
                     class_ = getattr(module, class_name)
-                    self.__objects[key] = class_(**value)
+                    obj = class_(**value)
+                    setattr(obj, "__class__", class_)  # Set the class dynamically
+                    self.__objects[key] = obj
+
+    def get_module_name(self, class_name):
+        if class_name == 'BaseModel':
+            return 'base_model'
+        else:
+            return class_name.lower()
+
