@@ -9,7 +9,7 @@ To start the command interpreter, follow these steps:
 
     - Clone the repository to your local machine.
     - Navigate to the project directory.
-    - Run the command python interpreter.py to start the interpreter.
+    - Run the command `python3 console.py` to start the interpreter.
 
 How to Use
 
