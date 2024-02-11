@@ -16,17 +16,29 @@ class BaseModel:
         '''init method for BaseModel class'''
         if kwargs:
             for key, value in kwargs.items():
-                if 'created_at' in kwargs and isinstance(kwargs['created_at'], str):
-                    kwargs['created_at'] = datetime.fromisoformat(kwargs['created_at'])
-                if 'updated_at' in kwargs and isinstance(kwargs['updated_at'], str):
-                    kwargs['updated_at'] = datetime.fromisoformat(kwargs['updated_at'])
+                if (
+                        'created_at' in
+                        kwargs and
+                        isinstance(kwargs['created_at'], str)
+                        ):
+                    kwargs['created_at'] = (
+                            datetime.fromisoformat(kwargs['created_at'])
+                            )
+                if (
+                        'updated_at' in
+                        kwargs and
+                        isinstance(kwargs['updated_at'], str)
+                        ):
+                    kwargs['updated_at'] = (
+                            datetime.fromisoformat(kwargs['updated_at'])
+                            )
                 if key != '__class__':
                     setattr(self, key, value)
             if 'id' not in kwargs:
                 self.id = str(uuid.uuid4())
             if 'created_at' not in kwargs:
                 self.created_at = datetime.now()
-            if 'updated_at' not in kwargs:     
+            if 'updated_at' not in kwargs:
                 self.updated_at = datetime.now()
         else:
             self.id = str(uuid.uuid4())

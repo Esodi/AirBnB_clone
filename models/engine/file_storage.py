@@ -30,7 +30,7 @@ class FileStorage:
             serialized_objs[key] = value.to_dict()
         with open(FileStorage.__file_path, 'w') as f:
             json.dump(serialized_objs, f)
-    
+
     def reload(self):
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
@@ -40,7 +40,12 @@ class FileStorage:
                     class_n = class_name[0:4] + "_" + class_name[4:]
                     module_name = class_n.lower()
                     module_path = os.path.join("models", module_name + ".py")
-                    spec = importlib.util.spec_from_file_location(module_name, module_path)
+                    spec = (
+                        importlib.util.spec_from_file_location(
+                            module_name,
+                            module_path
+                            )
+                        )
                     module = importlib.util.module_from_spec(spec)
                     spec.loader.exec_module(module)
                     class_ = getattr(module, class_name)

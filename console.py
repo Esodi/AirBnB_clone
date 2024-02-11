@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """HBNB console"""
 
-
 import cmd
 from datetime import datetime
 import json
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+
 
 class HBNBCommand(cmd.Cmd):
     """This is command line interpreter"""
@@ -61,7 +61,8 @@ class HBNBCommand(cmd.Cmd):
                     for j in data[key]:
                         if j in ['created_at', 'updated_at']:
                             data[key][j] = datetime.fromisoformat(data[key][j])
-                    print("[{}] ({}) {}".format(class_name, instance_id, data[key]))
+                    print("[{}] ({}) {}\
+".format(class_name, instance_id, data[key]))
                 else:
                     print("** no instance found **")
         except (FileNotFoundError, json.decoder.JSONDecodeError):
@@ -95,9 +96,8 @@ class HBNBCommand(cmd.Cmd):
             with open("file.json", "w") as file:
                 json.dump(data, file)
         except Exception as e:
-             print(e)
+            print(e)
 
-        
     def do_all(self, arg):
         """Prints all string representations of instances"""
         class_name = None
@@ -113,7 +113,9 @@ class HBNBCommand(cmd.Cmd):
                     if class_name not in ["BaseModel"]:
                         print("** class doesn't exist **")
                         return
-                    instances = [value for key, value in data.items() if key.startswith(class_name + ".")]
+                    instances = ([value for key,
+                                  value in data.items()
+                                  if key.startswith(class_name + ".")])
                 if not instances:
                     lst = []
                     print(lst)
@@ -155,7 +157,11 @@ class HBNBCommand(cmd.Cmd):
                 key = "{}.{}".format(class_name, instance_id)
                 if key in data:
                     instance_data = data[key]
-                    if attribute_name in instance_data and attribute_name not in ['id', 'created_at', 'updated_at']:
+                    if (
+                            attribute_name in
+                            instance_data and
+                            attribute_name not in
+                            ['id', 'created_at', 'updated_at']):
                         if isinstance(instance_data[attribute_name], int):
                             attribute_value = int(attribute_value)
                         elif isinstance(instance_data[attribute_name], float):
@@ -176,6 +182,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_create(self):
         print("Ex: $ create <class name>")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
