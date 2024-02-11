@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class name missing **")
                 return
             class_name = arg.split()[0]
-            if class_name not in ["BaseModel"]:
+            if class_name not in ["BaseModel", "User"]:
                 print("** class doesn't exist **")
                 return
             storage = FileStorage()
@@ -46,7 +46,7 @@ class HBNBCommand(cmd.Cmd):
             return
         args = arg.split()
         class_name = args[0]
-        if class_name not in ["BaseModel"]:
+        if class_name not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -76,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
                 return
             args = arg.split()
             class_name = args[0]
-            if class_name not in ["BaseModel"]:
+            if class_name not in ["BaseModel", "User"]:
                 print("** class doesn't exist **")
                 return
             if len(args) < 2:
@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     args = arg.split()
                     class_name = args[0]
-                    if class_name not in ["BaseModel"]:
+                    if class_name not in ["BaseModel", "User"]:
                         print("** class doesn't exist **")
                         return
                     instances = ([value for key,
@@ -136,7 +136,7 @@ class HBNBCommand(cmd.Cmd):
             return
         args = arg.split()
         class_name = args[0]
-        if class_name not in ["BaseModel"]:
+        if class_name not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:

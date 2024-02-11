@@ -6,10 +6,10 @@ from models.base_model import BaseModel
 
 
 class User(BaseModel):
-        """
-        class User that handles information
-        """
-        email = ""
-        password = ""
-        first_name = ""
-        last_name = ""
+    """
+    class User that handles information
+    """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""

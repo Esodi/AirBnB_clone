@@ -6,7 +6,7 @@
 
 import uuid
 from datetime import datetime
-from models.__init__ import storage
+from  models.__init__ import storage
 
 
 class BaseModel:
@@ -54,10 +54,10 @@ class BaseModel:
     def to_dict(self):
         '''Return dictionary form of object's attributes'''
         self.__dict__['__class__'] = self.__class__.__name__
-        self.__dict__['created_at'] = self.created_at.isoformat()
-        self.__dict__['updated_at'] = self.updated_at.isoformat()
+        self.__dict__['created_at'] = self.__dict__['created_at'].isoformat()
+        self.__dict__['updated_at'] = self.__dict__['updated_at'].isoformat()
         return self.__dict__
 
     def __str__(self):
         '''Returns the string form of an object'''
-        return f"[{BaseModel.__name__}] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"

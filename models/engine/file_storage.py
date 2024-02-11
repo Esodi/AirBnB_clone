@@ -37,7 +37,10 @@ class FileStorage:
                 data = json.load(file)
                 for key, value in data.items():
                     class_name, obj_id = key.split('.')
-                    class_n = class_name[0:4] + "_" + class_name[4:]
+                    if class_name == 'BaseModel':
+                        class_n = class_name[0:4] + "_" + class_name[4:]
+                    else:
+                        class_n = class_name
                     module_name = class_n.lower()
                     module_path = os.path.join("models", module_name + ".py")
                     spec = (
