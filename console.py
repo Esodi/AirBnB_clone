@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""HBNB console"""
+"""HBNB console application for airbnb"""
 
 import cmd
 from datetime import datetime
@@ -173,15 +173,6 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
         except (FileNotFoundError, json.decoder.JSONDecodeError):
             print("** no instance found **")
-
-    def help_quit(self):
-        print("Quit command to exit the program")
-
-    def help_EOF(self):
-        print("Exit console on EOL")
-
-    def help_create(self):
-        print("Ex: $ create <class name>")
 
 
 if __name__ == '__main__':
