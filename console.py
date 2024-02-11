@@ -28,13 +28,27 @@ class HBNBCommand(cmd.Cmd):
                 print("** class name missing **")
                 return
             class_name = arg.split()[0]
-            if class_name not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
+            if class_name not in [
+                    "BaseModel",
+                    "User",
+                    "Place",
+                    "State",
+                    "City",
+                    "Amenity",
+                    "Review"
+                    ]:
                 print("** class doesn't exist **")
                 return
             if class_name == "BaseModel":
-                module = __import__('models.' + 'base_model', fromlist=['base_model'])
+                module = __import__(
+                        'models.' + 'base_model',
+                        fromlist=['base_model']
+                        )
             else:
-                module = __import__('models.' + class_name.lower(), fromlist=[class_name])
+                module = __import__(
+                        'models.' + class_name.lower(),
+                        fromlist=[class_name]
+                        )
             class_ = getattr(module, class_name)
             storage = FileStorage()
             new_instance = class_()
@@ -51,7 +65,15 @@ class HBNBCommand(cmd.Cmd):
             return
         args = arg.split()
         class_name = args[0]
-        if class_name not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
+        if class_name not in [
+                "BaseModel",
+                "User",
+                "Place",
+                "State",
+                "City",
+                "Amenity",
+                "Review"
+                ]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -115,7 +137,15 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     args = arg.split()
                     class_name = args[0]
-                    if class_name not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
+                    if class_name not in [
+                            "BaseModel",
+                            "User",
+                            "Place",
+                            "State",
+                            "City",
+                            "Amenity",
+                            "Review"
+                            ]:
                         print("** class doesn't exist **")
                         return
                     instances = ([value for key,
@@ -132,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
                     lst.append(f"[{i['__class__']}] ({i['id']}) {i}")
                 print(lst)
         except (FileNotFoundError, json.decoder.JSONDecodeError):
-            print("No instances found")
+            print("[]")
 
     def do_update(self, arg):
         """Updates an instance based on class name and id"""
@@ -141,7 +171,15 @@ class HBNBCommand(cmd.Cmd):
             return
         args = arg.split()
         class_name = args[0]
-        if class_name not in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
+        if class_name not in [
+                "BaseModel",
+                "User",
+                "Place",
+                "State",
+                "City",
+                "Amenity",
+                "Review"
+                ]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
