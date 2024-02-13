@@ -186,11 +186,11 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         instance_id = args[1]
-        if len(args) < 4:
+        if len(args) < 3:
             print("** attribute name missing **")
             return
         attribute_name = args[2]
-        if len(args) < 5:
+        if len(args) < 4:
             print("** value missing **")
             return
         attribute_value = args[3]
@@ -200,18 +200,12 @@ class HBNBCommand(cmd.Cmd):
                 key = "{}.{}".format(class_name, instance_id)
                 if key in data:
                     instance_data = data[key]
-                    if (
-                            attribute_name in
-                            instance_data and
-                            attribute_name not in
-                            ['id', 'created_at', 'updated_at']):
-                        if isinstance(instance_data[attribute_name], int):
-                            attribute_value = int(attribute_value)
-                        elif isinstance(instance_data[attribute_name], float):
-                            attribute_value = float(attribute_value)
-                        instance_data[attribute_name] = attribute_value
-                        file.seek(0)
-                        json.dump(data, file)
+                    instance_data[attribute_name] = eval(attribute_value)
+                    with open("file.json", "w") as file:
+                        data[key] = instance_data
+                        json.dump(data, file, indent=4)
+                    #file.seek(0)
+                        #json.dump(data, file)
                 else:
                     print("** no instance found **")
         except (FileNotFoundError, json.decoder.JSONDecodeError):
