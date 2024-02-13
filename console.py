@@ -103,7 +103,15 @@ class HBNBCommand(cmd.Cmd):
                 return
             args = arg.split()
             class_name = args[0]
-            if class_name not in ["BaseModel", "User"]:
+            if class_name not in [
+                    "BaseModel",
+                    "User",
+                    "Place",
+                    "State",
+                    "City",
+                    "Amenity",
+                    "Review"
+                    ]:
                 print("** class doesn't exist **")
                 return
             if len(args) < 2:
@@ -204,8 +212,6 @@ class HBNBCommand(cmd.Cmd):
                     with open("file.json", "w") as file:
                         data[key] = instance_data
                         json.dump(data, file, indent=4)
-                    #file.seek(0)
-                        #json.dump(data, file)
                 else:
                     print("** no instance found **")
         except (FileNotFoundError, json.decoder.JSONDecodeError):
