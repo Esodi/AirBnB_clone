@@ -143,8 +143,13 @@ class HBNBCommand(cmd.Cmd):
                 if not arg:
                     instances = data.values()
                 else:
-                    args = arg.split()
-                    class_name = args[0]
+                    if arg < 2:
+                        args = arg.split(".")
+                        class_n = args[0]
+                        class_name = class_n;
+                    else: 
+                        args = arg.split()
+                        class_name = args[0]
                     if class_name not in [
                             "BaseModel",
                             "User",
