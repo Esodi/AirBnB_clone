@@ -1,0 +1,17 @@
+
+footer {
+	background-color: white;
+	height: 60px;
+	width: 100%;
+	border-top: 1px #CCCCCC solid;
+	position: fixed;
+	bottom: 0;
+}
+p {
+	margin: 0;
+	padding: 0;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+}
