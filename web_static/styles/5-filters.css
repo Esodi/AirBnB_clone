@@ -12,6 +12,7 @@
 	top: 50%;
 	left: 25%;
 	transform: translateY(-50%);
+	line-height: 0;
 }
 .locations h3 {
 	font-weight: 600;
@@ -31,6 +32,7 @@
         top: 50%;
         left: 10%;
         transform: translateY(-50%);
+	line-height: 0;
 }
 .amenities h3 {
 	font-weight: 600;
