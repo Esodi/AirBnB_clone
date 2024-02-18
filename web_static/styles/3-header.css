@@ -4,9 +4,11 @@ header
 	height: 70px;
 	width: 100%;
 	border-bottom: solid 1px #CCCCCC;
+	position:;
 }
-div
+.logo
 {
+	position:;
 	left: 20px;
 	width: 14%;
 	height: 100%;
