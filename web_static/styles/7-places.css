@@ -1,39 +1,28 @@
 .places h1 {
-	font-size: 30px;
+    font-size: 30px;
 }
-
-.places {
+.places article {
+    display: inline-block;
+    position: relative;
+    left: 2.5%;
     
 }
-.v {
-    display: flex;
-    justify-content: space-between;
+.places h2 {
+    font-size: 30px;
 }
-@media (max-width: 768px) {
-    .x, .y, .z {
-        flex-basis: 100%;
-    }
-}
-
-.x, .y, .z {
-    flex: 1 1 30%;
-    margin: 20px;
+.places .place1, .place2, .place3
+{
+    width: 390px;
+    height: auto;
     padding: 20px;
-	width: 390px;
+    margin: 20px;
     border: #FF5A5F 1px solid;
     border-radius: 4px;
-	display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.x h2, .y h2, .z h2 {
-    font-size: 30px;
     text-align: center;
-    margin: 0;
 }
-.z {
-	position: relative;
-	left: 50%;
-	transform: translateX(-55%);
+.place3
+{
+    position: absolute;
+    transform: translateX(55%);
+
 }
