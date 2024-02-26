@@ -129,3 +129,31 @@ article h2{
 .description one {
 	padding-bottom: 0;
 }
+.places h1 {
+    font-size: 30px;
+}
+.places article {
+    display: inline-block;
+    position: relative;
+    left: 2.5%;
+    
+}
+.places h2 {
+    font-size: 30px;
+}
+.places .place1, .place2, .place3
+{
+    width: 390px;
+    height: auto;
+    padding: 20px;
+    margin: 20px;
+    border: #FF5A5F 1px solid;
+    border-radius: 4px;
+    text-align: center;
+}
+.place3
+{
+    position: absolute;
+    transform: translateX(55%);
+
+}
